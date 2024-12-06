@@ -35,48 +35,43 @@ public class Main {
 
             //A lógica da impressão é Imprimir espaço antes do elemento, com excessão do primeiro
             public void imprimePreOrdem() {
-                this.preOrdem(this.raiz, true);
-                System.out.println();
+                StringBuilder resultado = new StringBuilder();
+                this.preOrdem(this.raiz, resultado);
+                System.out.println(resultado.toString().trim());
             }
 
             public void imprimePosOrdem() {
-                this.posOrdem(this.raiz, true);
-                System.out.println();
+                StringBuilder resultado = new StringBuilder();
+                this.posOrdem(this.raiz, resultado);
+                System.out.println(resultado.toString().trim());
             }
 
             public void imprimeEmOrdem() {
-                this.emOrdem(this.raiz, true);
-                System.out.println(); // Para garantir que a linha termina com uma nova linha
+                StringBuilder resultado = new StringBuilder();
+                this.emOrdem(this.raiz, resultado);
+                System.out.println(resultado.toString().trim());
             }
 
 
-            public void preOrdem(Nodo nodo, boolean primeiraLetra) {
-                if (nodo == null)
-                    return;
-
-                if (!primeiraLetra) System.out.print(" ");
-                System.out.print(nodo.elemento);
-                this.preOrdem(nodo.esquerdo, false);
-                this.preOrdem(nodo.direito, false);
-            }
-
-            public void posOrdem(Nodo nodo, boolean primeiraLetra) {
-                if (nodo == null)
-                    return;
-
-                this.posOrdem(nodo.esquerdo, false);
-                this.posOrdem(nodo.direito, false);
-                if (!primeiraLetra) System.out.print(" ");
-                System.out.print(nodo.elemento);
-            }
-
-            public void emOrdem(Nodo nodo, boolean primeiraLetra) {
+            public void preOrdem(Nodo nodo, StringBuilder resultado) {
                 if (nodo == null) return;
+                resultado.append(nodo.elemento).append(" ");
+                this.preOrdem(nodo.esquerdo, resultado);
+                this.preOrdem(nodo.direito, resultado);
+            }
 
-                this.emOrdem(nodo.esquerdo, false);
-                if (!primeiraLetra) System.out.print(" ");
-                System.out.print(nodo.elemento);
-                this.emOrdem(nodo.direito, false);
+            public void posOrdem(Nodo nodo, StringBuilder resultado) {
+                if (nodo == null) return;
+                this.posOrdem(nodo.esquerdo, resultado);
+                this.posOrdem(nodo.direito, resultado);
+                resultado.append(nodo.elemento).append(" ");
+            }
+
+            public void emOrdem(Nodo nodo, StringBuilder resultado) {
+                if (nodo == null) return;
+                this.emOrdem(nodo.esquerdo, resultado);
+                resultado.append(nodo.elemento).append(" ");
+                this.emOrdem(nodo.direito, resultado);
             }
 
 
@@ -201,7 +196,6 @@ public class Main {
         // Posfixa: Visitar a sub-árvore esquerda, a sub-árvore direita e a raiz
 
         Scanner s = new Scanner(System.in);
-
         ArvoreBinariaBusca<String> abb = new ArvoreBinariaBusca<>();
 
         while (s.hasNext()) {
