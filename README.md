@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>beecrowd | 1200 - Operações em ABP I</title>
-</head>
 <body>
     <h1>beecrowd | 1200</h1>
     <h2>Operações em ABP I</h2>
